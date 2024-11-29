@@ -1,9 +1,7 @@
-import {StyleProps} from "../../Common/Props";
+import { StyleProps } from "../../Common/Props";
 
-interface Props extends StyleProps {
+interface Props extends StyleProps {}
 
-}
-
-export default function HexViewer({...rest}: Props) {
-    return <div {...rest}></div>
+export default function HexViewer({ ...rest }: Props) {
+  return <div {...rest}></div>;
 }

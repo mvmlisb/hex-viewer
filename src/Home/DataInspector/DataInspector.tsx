@@ -1,7 +1,7 @@
-import {StyleProps} from "../../Common/Props";
+import { StyleProps } from "../../Common/Props";
 
 interface Props extends StyleProps {}
 
-export default function DataInspector({...rest}: Props) {
-    return <div {...rest}></div>
+export default function DataInspector({ ...rest }: Props) {
+  return <div {...rest}></div>;
 }
