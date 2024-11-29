@@ -1,6 +1,6 @@
 import {StyleProps} from "../../Common/Props";
 
-interface Props extends StyleProps{
+interface Props extends StyleProps {
 
 }
 

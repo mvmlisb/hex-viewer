@@ -4,10 +4,10 @@ import DataInspector from "./DataInspector/DataInspector";
 
 
 export default function MainPage() {
-  return (
-    <Row >
-     <HexViewer/>
-        <DataInspector/>
-    </Row>
-  );
+    return (
+        <Row>
+            <HexViewer/>
+            <DataInspector/>
+        </Row>
+    );
 }
