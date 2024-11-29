@@ -1,4 +1,4 @@
-import {Row} from "../../Common/Blocks";
+import {Row} from "../../shared/Blocks";
 import React, {useCallback} from "react";
 import FileSelectorButton from "./FileSelectorButton";
 import {useFilesStore} from "../MainPage";

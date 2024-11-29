@@ -1,6 +1,6 @@
-import {StyleProps} from "../../Common/Props";
+import {StyleProps} from "../../shared/Props";
 import styled from "styled-components";
-import {Row} from "../../Common/Blocks";
+import {Row} from "../../shared/Blocks";
 import {ReactComponent as CloseIcon} from "../../assets/icons/close.svg";
 import React from "react";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import MainPage from "./Home/MainPage";
+import MainPage from "./home/MainPage";
 
 export default function App() {
-  return <MainPage />;
+    return <MainPage />;
 }

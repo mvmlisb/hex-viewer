@@ -1,6 +1,6 @@
 import React from "react";
 import Tab, {TabProps} from "./Tab";
-import {Row} from "../../Common/Blocks";
+import {Row} from "../../shared/Blocks";
 
 export interface Props {
     tabs: TabProps[];

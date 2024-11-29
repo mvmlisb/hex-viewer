@@ -1,10 +1,10 @@
-import {Column, Row} from "../Common/Blocks";
-import HexViewer from "./HexViewer/HexViewer";
-import DataInspector from "./DataInspector/DataInspector";
+import {Column, Row} from "../shared/Blocks";
+import HexViewer from "./hexViewer/HexViewer";
+import DataInspector from "./dataInspector/DataInspector";
 import React, {useMemo} from "react";
-import TopBar from "./TopBar/TopBar";
+import TopBar from "./topBar/TopBar";
 import {create} from "zustand";
-import Tabs from "./Tabs/Tabs";
+import Tabs from "./tabs/Tabs";
 
 interface FileProps {
     files: File[];

@@ -1,4 +1,4 @@
-import {StyleProps} from "../../Common/Props";
+import {StyleProps} from "../../shared/Props";
 import React, {useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 
