@@ -11,8 +11,8 @@ const Root = styled(Row)`
     align-items: center;
     cursor: pointer;
 
-    & > svg {
-        margin-left: 8px;
+    & > div {
+        margin-left: 6px;
     }
 `;
 

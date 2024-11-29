@@ -50,7 +50,7 @@ export default function MainPage() {
             <Row>
                 <Column>
                     <Tabs tabs={tabs} />
-                    <HexViewer />
+                    {selectedFile && <HexViewer file={selectedFile} />}
                 </Column>
                 <DataInspector />
             </Row>

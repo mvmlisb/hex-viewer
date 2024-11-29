@@ -1,21 +1,20 @@
-import { useFilesStore } from "../MainPage";
-import { useCallback } from "react";
+import {useCallback} from "react";
 
-export default function FileSelectorButton() {
-  const addFile = useFilesStore((state) => state.addFile);
+interface Props {
+    onChange: (files: FileList | null) => void;
+}
 
-  const handleFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files) {
-        addFile(e.target.files[0]);
-      }
-    },
-    [addFile],
-  );
+export default function FileSelectorButton({onChange}: Props) {
+    const handleFileChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange(e.target.files);
+        },
+        [onChange]
+    );
 
-  return (
-    <div>
-      <input type="file" onChange={handleFileChange} />
-    </div>
-  );
+    return (
+        <div>
+            <input type="file" onChange={handleFileChange} />
+        </div>
+    );
 }
