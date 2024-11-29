@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e94be13-6eaf-4419-876c-2051603e65c3" name="Changes" comment="In progress" />
+    <list default="true" id="0e94be13-6eaf-4419-876c-2051603e65c3" name="Changes" comment="In progress">
+      <change afterPath="$PROJECT_DIR$/src/Home/Tabs/Tab.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Home/Tabs/Tabs.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Home/TopBar/FileSelectorButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Home/TopBar/TopBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Home/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/MainPage.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,11 +67,16 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.start.executor": "Run",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
     "ts.external.directory.path": "D:\\repos\\hex-viewer\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\repos\hex-viewer\src\Home\TopBar" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -99,7 +113,7 @@
       <workItem from="1732897252868" duration="757000" />
       <workItem from="1732898029324" duration="59000" />
       <workItem from="1732898096686" duration="136000" />
-      <workItem from="1732898278060" duration="1803000" />
+      <workItem from="1732898278060" duration="4218000" />
     </task>
     <task id="LOCAL-00001" summary="In progress">
       <option name="closed" value="true" />
@@ -133,7 +147,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732900109255</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1732900132457</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732900132457</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
