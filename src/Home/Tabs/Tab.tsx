@@ -4,6 +4,8 @@ import {Row} from "../../Common/Blocks";
 
 const TabComponent = styled(Row)`
     padding: 8px;
+    background: lightgray;
+    border-radius: 4px;
 `
 
 
@@ -18,6 +20,4 @@ export default function Tab({label, isSelected, onSelect, onRemove, ...rest}: Ta
     return <TabComponent {...rest} onClick={onSelect}>
         {label}
     </TabComponent>
-
-
 }

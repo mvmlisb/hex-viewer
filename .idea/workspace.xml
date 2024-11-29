@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e94be13-6eaf-4419-876c-2051603e65c3" name="Changes" comment="In progress">
-      <change afterPath="$PROJECT_DIR$/src/Home/Tabs/Tab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Home/Tabs/Tabs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Home/TopBar/FileSelectorButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Home/TopBar/TopBar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Home/Tabs/Tab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/Tabs/Tab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Home/TopBar/FileSelectorButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/TopBar/FileSelectorButton.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +21,9 @@
         <option value="TypeScript JSX File" />
       </list>
     </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,6 +40,9 @@
     "accountId": "104e147e-12e7-453a-9b4b-8c46079a3afd"
   }
 }]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -113,7 +114,7 @@
       <workItem from="1732897252868" duration="757000" />
       <workItem from="1732898029324" duration="59000" />
       <workItem from="1732898096686" duration="136000" />
-      <workItem from="1732898278060" duration="4218000" />
+      <workItem from="1732898278060" duration="4620000" />
     </task>
     <task id="LOCAL-00001" summary="In progress">
       <option name="closed" value="true" />
@@ -155,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732900132457</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1732902628533</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732902628533</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
