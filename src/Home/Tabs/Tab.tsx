@@ -1,30 +1,45 @@
-import { StyleProps } from "../../Common/Props";
+import {StyleProps} from "../../Common/Props";
 import styled from "styled-components";
-import { Row } from "../../Common/Blocks";
+import {Row} from "../../Common/Blocks";
+import {ReactComponent as CloseIcon} from "../../assets/icons/close.svg";
+import React from "react";
 
-const TabComponent = styled(Row)`
-  padding: 8px;
-  background: lightgray;
-  border-radius: 4px;
+const Root = styled(Row)`
+    padding: 8px;
+    background: lightgray;
+    border-radius: 4px;
+    align-items: center;
+    cursor: pointer;
+
+    & > svg {
+        margin-left: 8px;
+    }
 `;
 
 export interface TabProps extends StyleProps {
-  label: string;
-  isSelected: boolean;
-  onSelect: () => void;
-  onRemove: () => void;
+    label: string;
+    isSelected: boolean;
+    onSelect: () => void;
+    onRemove: () => void;
 }
 
 export default function Tab({
-  label,
-  isSelected,
-  onSelect,
-  onRemove,
-  ...rest
+    label,
+    isSelected,
+    onSelect,
+    onRemove,
+    ...rest
 }: TabProps) {
-  return (
-    <TabComponent {...rest} onClick={onSelect}>
-      {label}
-    </TabComponent>
-  );
+    const handleRemove = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        onRemove();
+    };
+    return (
+        <Root {...rest} onClick={onSelect}>
+            {label}
+            <div onClick={handleRemove}>
+                <CloseIcon height={12} width={12} />
+            </div>
+        </Root>
+    );
 }
