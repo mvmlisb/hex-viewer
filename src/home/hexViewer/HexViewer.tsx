@@ -1,6 +1,7 @@
 import {StyleProps} from "../../shared/Props";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
+import {Block, getExclusiveEnd} from "./Block";
 
 const MAX_SECTOR_SIZE = 4096;
 const CELLS_PER_ROW = 16;
@@ -9,19 +10,10 @@ const Root = styled.div`
     font-family: monospace;
 `;
 
-interface Block {
-    start: number;
-    count: number;
-}
-
 const EmptyData = new Uint8Array(MAX_SECTOR_SIZE);
 
 function getByteCountToRead(start: number, fileSize: number) {
     return Math.min(MAX_SECTOR_SIZE, fileSize - start);
-}
-
-function getExclusiveEnd(block: Block) {
-    return block.start + block.count;
 }
 
 interface Props extends StyleProps {
@@ -62,17 +54,36 @@ export default function HexViewer({file, ...rest}: Props) {
         );
     }, [block, file, reader]);
 
-    const test = map(rawData, (byte, index) => {
-        const addBreak = (index + 1) % CELLS_PER_ROW === 0;
+    const cells = map(rawData, (byte, index) => {
+        const isEndOfRow = (index + 1) % CELLS_PER_ROW === 0;
+        const addSlitter =
+            (index + 1) % (CELLS_PER_ROW / 2) === 0 && !isEndOfRow;
         return (
             <React.Fragment key={index}>
-                <span style={{marginLeft: 4}}>
-                    {byte.toString(16).padEnd(2, "0")}
+                <span
+                    style={
+                        isEndOfRow
+                            ? {
+                                  borderRight: addSlitter ? "1px solid" : "none"
+                              }
+                            : {
+                                  padding: 3,
+                                  borderRight: addSlitter
+                                      ? "1px solid"
+                                      : "none",
+                                  borderColor: "lightgray"
+                              }
+                    }
+                >
+                    {byte.toString(16).padEnd(2, "0").toUpperCase()}
                 </span>
-                {addBreak && <div />}
+                {isEndOfRow && <div />}
             </React.Fragment>
         );
     });
 
-    return <Root>{test}</Root>;
+    const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+        console.log(e);
+    }, []);
+    return <Root onScrollCapture={handleScroll}>{cells}</Root>;
 }
