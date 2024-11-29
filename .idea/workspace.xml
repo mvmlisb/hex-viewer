@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e94be13-6eaf-4419-876c-2051603e65c3" name="Changes" comment="In progress">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/MainPage.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="0e94be13-6eaf-4419-876c-2051603e65c3" name="Changes" comment="In progress" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,12 +51,14 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.start.executor": "Run",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
     "ts.external.directory.path": "D:\\repos\\hex-viewer\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -100,7 +99,7 @@
       <workItem from="1732897252868" duration="757000" />
       <workItem from="1732898029324" duration="59000" />
       <workItem from="1732898096686" duration="136000" />
-      <workItem from="1732898278060" duration="1671000" />
+      <workItem from="1732898278060" duration="1803000" />
     </task>
     <task id="LOCAL-00001" summary="In progress">
       <option name="closed" value="true" />
@@ -126,11 +125,30 @@
       <option name="project" value="LOCAL" />
       <updated>1732899636306</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1732900109255</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732900109255</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="In progress" />
