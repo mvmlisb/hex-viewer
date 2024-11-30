@@ -11,7 +11,13 @@ import styled from "styled-components";
 const EmptyData = new DataView(new ArrayBuffer(8));
 
 const Root = styled(Column)`
-    box-sizing: border-box;
+    & * {
+        box-sizing: border-box;
+    }
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
 `;
 
 interface FileProps {
@@ -69,7 +75,7 @@ export default function MainPage() {
     return (
         <Root>
             <TopBar />
-            <Row>
+            <Row style={{flex: 1}}>
                 <DataInspector />
                 <Column>
                     <Tabs tabs={tabs} />

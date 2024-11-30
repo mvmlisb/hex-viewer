@@ -46,6 +46,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-virtualized-auto-sizer": "^1.0.4",
+    "@types/react-window": "^1.8.8",
     "husky": "^9.1.7",
     "prettier": "3.4.1"
   },
