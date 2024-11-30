@@ -1,10 +1,13 @@
 import {StyleProps} from "../../shared/props/Props";
 import styled from "styled-components";
-import {ComputerType} from "./Computers";
+import {ComputersBySignType, ComputerType} from "./Computers";
+import {SignType} from "./SignType";
+import {useDataStore} from "../MainPage";
+import React from "react";
 
 const Root = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 3fr 2fr 2fr;
 `;
 
 const ComputerLabels: Record<ComputerType, string> = {
@@ -14,17 +17,34 @@ const ComputerLabels: Record<ComputerType, string> = {
     get64Bit: "64-bit integer"
 };
 
-const Header = styled.h5``;
+const HeaderCell = styled.h5``;
+const RegularCell = styled.span``;
 
-const HeaderLabels = ["Type", "Unsigned (+)", "Signed (+-)"];
+const HeaderLabels = ["Type", "Unsigned", "Signed"];
 
 interface Props extends StyleProps {}
 
 export default function DataInspectorValues({...rest}: Props) {
+    const data = useDataStore(state => state.data);
     return (
         <Root>
             {HeaderLabels.map((label, index) => (
-                <Header key={index}>{label}</Header>
+                <HeaderCell key={label}>{label}</HeaderCell>
+            ))}
+            {Object.entries(ComputerLabels).map(([type, value]) => (
+                <React.Fragment key={type}>
+                    <RegularCell>{value}</RegularCell>
+                    <RegularCell>
+                        {ComputersBySignType[SignType.Unsigned][
+                            type as ComputerType
+                        ](data)}
+                    </RegularCell>
+                    <RegularCell>
+                        {ComputersBySignType[SignType.Unsigned][
+                            type as ComputerType
+                        ](data)}
+                    </RegularCell>
+                </React.Fragment>
             ))}
         </Root>
     );
