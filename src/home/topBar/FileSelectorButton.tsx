@@ -1,4 +1,4 @@
-import {useCallback} from "react";
+import React, {useCallback} from "react";
 
 interface Props {
     onChange: (files: FileList | null) => void;

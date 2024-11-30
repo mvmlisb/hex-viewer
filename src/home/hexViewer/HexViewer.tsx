@@ -6,13 +6,9 @@ import {Block, getExclusiveEnd} from "./Block";
 const MAX_SECTOR_SIZE = 4096;
 const CELLS_PER_ROW = 16;
 
-const Root = styled.div`
+const Root = styled.span`
     font-family: monospace;
     overflow-y: auto;
-    height: 100%;
-    max-height: 100%;
-    min-height: 0;
-    position: relative;
 `;
 
 const EmptyData = new Uint8Array(MAX_SECTOR_SIZE);

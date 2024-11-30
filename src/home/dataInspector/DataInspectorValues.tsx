@@ -1,6 +1,9 @@
 import {StyleProps} from "../../shared/props/Props";
 import styled from "styled-components";
-import {ComputersBySignType, ComputerType} from "./Computers";
+import {
+    DataViewOperationsBySignType,
+    DataViewOperationType
+} from "./DataViewOperations";
 import {SignType} from "./SignType";
 import {useDataStore} from "../MainPage";
 import React from "react";
@@ -10,17 +13,18 @@ const Root = styled.div`
     grid-template-columns: 3fr 2fr 2fr;
 `;
 
-const ComputerLabels: Record<ComputerType, string> = {
+const HeaderCell = styled.h5``;
+
+const RegularCell = styled.span``;
+
+const HeaderLabels = ["Type", "Unsigned", "Signed"];
+
+const ComputerLabels: Record<DataViewOperationType, string> = {
     get8Bit: "8-bit integer",
     get16Bit: "16-bit integer",
     get32Bit: "32-bit integer",
     get64Bit: "64-bit integer"
 };
-
-const HeaderCell = styled.h5``;
-const RegularCell = styled.span``;
-
-const HeaderLabels = ["Type", "Unsigned", "Signed"];
 
 interface Props extends StyleProps {}
 
@@ -35,13 +39,13 @@ export default function DataInspectorValues({...rest}: Props) {
                 <React.Fragment key={type}>
                     <RegularCell>{value}</RegularCell>
                     <RegularCell>
-                        {ComputersBySignType[SignType.Unsigned][
-                            type as ComputerType
+                        {DataViewOperationsBySignType[SignType.Unsigned][
+                            type as DataViewOperationType
                         ](data)}
                     </RegularCell>
                     <RegularCell>
-                        {ComputersBySignType[SignType.Unsigned][
-                            type as ComputerType
+                        {DataViewOperationsBySignType[SignType.Unsigned][
+                            type as DataViewOperationType
                         ](data)}
                     </RegularCell>
                 </React.Fragment>
