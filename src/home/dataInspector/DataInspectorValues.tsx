@@ -11,12 +11,18 @@ import React from "react";
 const Root = styled.div`
     display: grid;
     grid-template-columns: 3fr 2fr 2fr;
-    grid-gap: 8px 32px;
+    grid-gap: 8px 40px;
+    margin: 16px;
 `;
 
-const HeaderCell = styled.h5``;
+const HeaderCell = styled.h5`
+    text-align: center;
+    vertical-align: middle;
+`;
 
-const RegularCell = styled.span``;
+const RegularCell = styled.span`
+    vertical-align: middle;
+`;
 
 const HeaderLabels = ["Type", "Unsigned", "Signed"];
 
