@@ -6,11 +6,11 @@ import {Block, getExclusiveEnd} from "./Block";
 const MAX_SECTOR_SIZE = 4096;
 const CELLS_PER_ROW = 16;
 
-const Root = styled.span`
+const Root = styled.div`
     font-family: monospace;
     overflow-y: auto;
+    height: 100vh;
 `;
-
 const EmptyData = new Uint8Array(MAX_SECTOR_SIZE);
 
 function getByteCountToRead(start: number, fileSize: number) {
@@ -87,5 +87,9 @@ export default function HexViewer({file, ...rest}: Props) {
         console.log(e);
     }, []);
 
-    return <Root onScroll={handleScroll}>{cells}</Root>;
+    return (
+        <Root onScroll={handleScroll} {...rest}>
+            {cells}
+        </Root>
+    );
 }

@@ -7,7 +7,7 @@ interface Props extends StyleProps {}
 
 export default function DataInspector({...rest}: Props) {
     return (
-        <Column>
+        <Column {...rest}>
             <ByteOrderSelector></ByteOrderSelector>
             <DataInspectorValues></DataInspectorValues>
         </Column>

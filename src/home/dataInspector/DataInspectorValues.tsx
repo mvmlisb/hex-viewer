@@ -11,6 +11,7 @@ import React from "react";
 const Root = styled.div`
     display: grid;
     grid-template-columns: 3fr 2fr 2fr;
+    grid-gap: 8px 32px;
 `;
 
 const HeaderCell = styled.h5``;
@@ -32,7 +33,7 @@ export default function DataInspectorValues({...rest}: Props) {
     const data = useDataStore(state => state.data);
     return (
         <Root>
-            {HeaderLabels.map((label, index) => (
+            {HeaderLabels.map(label => (
                 <HeaderCell key={label}>{label}</HeaderCell>
             ))}
             {Object.entries(ComputerLabels).map(([type, value]) => (
