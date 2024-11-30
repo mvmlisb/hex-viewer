@@ -1,8 +1,9 @@
-import {StyleProps} from "../../shared/Props";
+import {StyleProps} from "../../shared/props/Props";
 import styled from "styled-components";
-import {Row} from "../../shared/Blocks";
+import {Row} from "../../shared/components/Blocks";
 import {ReactComponent as CloseIcon} from "../../assets/icons/close.svg";
 import React from "react";
+import IconButton from "../../shared/components/IconButton";
 
 const Root = styled(Row)`
     padding: 8px;
@@ -37,9 +38,10 @@ export default function Tab({
     return (
         <Root {...rest} onClick={onSelect}>
             {label}
-            <div onClick={handleRemove}>
-                <CloseIcon height={12} width={12} />
-            </div>
+            <IconButton
+                icon={<CloseIcon height={12} width={12} />}
+                onClick={handleRemove}
+            ></IconButton>
         </Root>
     );
 }

@@ -1,7 +1,13 @@
-import {StyleProps} from "../../shared/Props";
+import {StyleProps} from "../../shared/props/Props";
+import {Column} from "../../shared/components/Blocks";
+import ByteOrderSelector from "./ByteOrderSelector";
 
 interface Props extends StyleProps {}
 
 export default function DataInspector({...rest}: Props) {
-    return <div {...rest}></div>;
+    return (
+        <Column>
+            <ByteOrderSelector></ByteOrderSelector>
+        </Column>
+    );
 }

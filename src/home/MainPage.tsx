@@ -1,10 +1,13 @@
-import {Column, Row} from "../shared/Blocks";
+import {Column, Row} from "../shared/components/Blocks";
 import HexViewer from "./hexViewer/HexViewer";
 import DataInspector from "./dataInspector/DataInspector";
 import React, {useMemo} from "react";
 import TopBar from "./topBar/TopBar";
 import {create} from "zustand";
 import Tabs from "./tabs/Tabs";
+import {ByteOrder} from "./dataInspector/ByteOrder";
+
+const EmptyData = new DataView(new ArrayBuffer(8));
 
 interface FileProps {
     files: File[];
@@ -25,6 +28,20 @@ export const useFilesStore = create<FileProps>(set => ({
         })),
     selectedFile: null,
     setSelectedFile: (file: File) => set({selectedFile: file})
+}));
+
+interface DataViewProps {
+    data: DataView;
+    setData: (data: DataView) => void;
+    byteOrder: ByteOrder;
+    setByteOrder: (byteOrder: ByteOrder) => void;
+}
+
+export const useDataStore = create<DataViewProps>(set => ({
+    data: EmptyData,
+    setData: (data: DataView) => set({data}),
+    byteOrder: ByteOrder.LittleEndian,
+    setByteOrder: (byteOrder: ByteOrder) => set({byteOrder})
 }));
 
 export default function MainPage() {

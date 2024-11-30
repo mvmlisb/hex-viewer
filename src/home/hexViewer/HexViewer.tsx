@@ -1,4 +1,4 @@
-import {StyleProps} from "../../shared/Props";
+import {StyleProps} from "../../shared/props/Props";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import {Block, getExclusiveEnd} from "./Block";
@@ -8,6 +8,7 @@ const CELLS_PER_ROW = 16;
 
 const Root = styled.div`
     font-family: monospace;
+    overflow-y: hidden;
 `;
 
 const EmptyData = new Uint8Array(MAX_SECTOR_SIZE);
@@ -67,7 +68,7 @@ export default function HexViewer({file, ...rest}: Props) {
                                   borderRight: addSlitter ? "1px solid" : "none"
                               }
                             : {
-                                  padding: 3,
+                                  padding: 4,
                                   borderRight: addSlitter
                                       ? "1px solid"
                                       : "none",
@@ -85,5 +86,6 @@ export default function HexViewer({file, ...rest}: Props) {
     const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
         console.log(e);
     }, []);
-    return <Root onScrollCapture={handleScroll}>{cells}</Root>;
+
+    return <Root onScroll={handleScroll}>{cells}</Root>;
 }
