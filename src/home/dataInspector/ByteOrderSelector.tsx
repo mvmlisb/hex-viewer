@@ -1,8 +1,13 @@
 import React from "react";
 import {Row} from "../../shared/components/Blocks";
-import {ByteOrder, ByteOrderLabels} from "./ByteOrder";
+import {ByteOrder} from "./ByteOrder";
 import {useDataStore} from "../MainPage";
 import RadioButton from "../../shared/components/RadioButton";
+
+const ByteOrderLabels: Record<ByteOrder, string> = {
+    [ByteOrder.LittleEndian]: "Little Endian",
+    [ByteOrder.BigEndian]: "Big Endian"
+};
 
 export default function ByteOrderSelector() {
     const selectedByteOrder = useDataStore(state => state.byteOrder);

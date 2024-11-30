@@ -6,8 +6,13 @@ import TopBar from "./topBar/TopBar";
 import {create} from "zustand";
 import Tabs from "./tabs/Tabs";
 import {ByteOrder} from "./dataInspector/ByteOrder";
+import styled from "styled-components";
 
 const EmptyData = new DataView(new ArrayBuffer(8));
+
+const Root = styled(Column)`
+    box-sizing: border-box;
+`;
 
 interface FileProps {
     files: File[];
@@ -62,15 +67,15 @@ export default function MainPage() {
     );
 
     return (
-        <Column>
+        <Root>
             <TopBar />
             <Row>
+                <DataInspector />
                 <Column>
                     <Tabs tabs={tabs} />
                     {selectedFile && <HexViewer file={selectedFile} />}
                 </Column>
-                <DataInspector />
             </Row>
-        </Column>
+        </Root>
     );
 }
