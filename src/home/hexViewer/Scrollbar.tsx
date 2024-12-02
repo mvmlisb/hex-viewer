@@ -4,9 +4,6 @@ import React, {useEffect, useRef} from "react";
 export default function Scrollbar() {
     const thumbRef = React.useRef<HTMLDivElement>(null);
     const isMouseDownRef = useRef<boolean>(false);
-    const prevMouseDownYRef = useRef<number>(-1);
-
-    console.log("prevMouseDownYRef.current", prevMouseDownYRef.current);
     const [thumbY, setThumbY] = React.useState<number>(0);
 
     useEffect(() => {
@@ -20,25 +17,11 @@ export default function Scrollbar() {
                 return;
             }
 
-            const prevMouseDown = prevMouseDownYRef.current;
-
-            if (prevMouseDown === -1) {
-                prevMouseDownYRef.current = e.clientY;
-                return;
-            }
-
             setThumbY(prev => {
                 if (e.clientY === prev) {
                     return prev;
                 }
-                prevMouseDownYRef.current = e.clientY;
-
-                const diff = e.clientY - prevMouseDown;
-
-                console.log("e", e);
-                console.log("prevMouseDown", prevMouseDown);
-                console.log("diff", diff);
-                return prev + diff;
+                return prev + e.movementY;
             });
         };
 
