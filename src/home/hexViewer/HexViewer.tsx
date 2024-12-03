@@ -1,9 +1,10 @@
 import {StyleProps} from "../../shared/props/Props";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import styled from "styled-components";
-import {getExclusiveEnd} from "./Block";
+import {Block, getExclusiveEnd} from "./Block";
 import {map} from "../../shared/utils";
 import {FixedSizeList as List} from "react-window";
+import {Row} from "../../shared/components/Blocks";
 
 const MAX_SECTOR_SIZE = 4096;
 const CELLS_PER_ROW = 16;
@@ -18,6 +19,15 @@ function getByteCountToRead(start: number, fileSize: number) {
     return Math.min(MAX_SECTOR_SIZE, fileSize - start);
 }
 
+function countZeroesInNumber(number: number) {
+    let count = 0;
+    let currentNumber = number;
+    while (currentNumber) {
+        count += currentNumber & 1;
+        currentNumber >>= 1;
+    }
+}
+
 interface Props extends StyleProps {
     file: File;
 }
@@ -26,14 +36,14 @@ const Bytes = ({
     index,
     style,
     data,
-    block
+    readBlock
 }: {
     index: number;
     style: React.CSSProperties;
     data: Uint8Array;
-    block: {start: number; count: number};
+    readBlock?: Block;
 }) => {
-    const relativeStart = index * CELLS_PER_ROW - block.start;
+    const relativeStart = index * CELLS_PER_ROW - (readBlock?.start ?? 0);
 
     const cells = map(
         data.slice(relativeStart, relativeStart + CELLS_PER_ROW),
@@ -48,14 +58,22 @@ const Bytes = ({
                             borderColor: "lightgray"
                         }}
                     >
-                        {byte.toString(16).padEnd(2, "0").toUpperCase()}
+                        {byte.toString(16).padStart(2, "0").toUpperCase()}
                     </span>
                 </React.Fragment>
             );
         }
     );
 
-    return <div style={style}>{cells}</div>;
+    return (
+        <Row style={style}>
+            <span style={{background: "lightgray", padding: 4}}>
+                {" "}
+                {index * CELLS_PER_ROW}
+            </span>
+            {cells}
+        </Row>
+    );
 };
 
 export default function HexViewer({file, ...rest}: Props) {
@@ -65,13 +83,13 @@ export default function HexViewer({file, ...rest}: Props) {
 
     const [rawData, setRawData] = useState<Uint8Array>(EmptyData);
 
-    const [block, setBlock] = useState({start: 0, count: 0});
+    const blockRef = useRef<Block>();
 
     const isLoadingRef = React.useRef(false);
 
     useEffect(() => {
         reader.onload = e => {
-            console.log("target", e.target);
+            console.log("target", e);
             const data = new Uint8Array(reader.result as ArrayBuffer);
             setRawData(data);
             isLoadingRef.current = false;
@@ -91,43 +109,45 @@ export default function HexViewer({file, ...rest}: Props) {
     );
 
     return (
-        <List
-            style={{
-                fontFamily: "monospace"
-            }}
-            height={500}
-            itemCount={totalRowCount}
-            itemData={rawData}
-            itemSize={24}
-            width={600}
-            onItemsRendered={({visibleStartIndex, visibleStopIndex}) => {
-                if (isLoadingRef.current) {
-                    return;
-                }
+        <div style={{maxHeight: "500px", position: "relative"}}>
+            <List
+                style={{
+                    fontFamily: "monospace"
+                }}
+                height={500}
+                itemCount={totalRowCount}
+                itemData={rawData}
+                itemSize={24}
+                width={600}
+                onItemsRendered={({visibleStartIndex, visibleStopIndex}) => {
+                    if (isLoadingRef.current) {
+                        return;
+                    }
 
-                isLoadingRef.current = true;
+                    isLoadingRef.current = true;
 
-                const start = visibleStartIndex * CELLS_PER_ROW;
-                const count = Math.min(
-                    (visibleStopIndex - visibleStartIndex) * CELLS_PER_ROW,
-                    file.size - start
-                );
+                    const start = visibleStartIndex * CELLS_PER_ROW;
+                    const count = Math.min(
+                        (visibleStopIndex - visibleStartIndex) * CELLS_PER_ROW,
+                        file.size - start
+                    );
 
-                console.log("start", start, "count", count);
+                    console.log("start", start, "count", count);
 
-                const block = {start, count};
-                requestRead(block);
-                setBlock(block);
-            }}
-        >
-            {({index, style}) => (
-                <Bytes
-                    index={index}
-                    style={style}
-                    data={rawData}
-                    block={block}
-                />
-            )}
-        </List>
+                    const block = {start, count};
+                    requestRead(block);
+                    blockRef.current = block;
+                }}
+            >
+                {({index, style}) => (
+                    <Bytes
+                        index={index}
+                        style={style}
+                        data={rawData}
+                        readBlock={blockRef.current}
+                    />
+                )}
+            </List>
+        </div>
     );
 }
