@@ -18,6 +18,7 @@ const Root = styled(Column)`
     position: absolute;
     height: 100%;
     width: 100%;
+    overflow-y: hidden;
 `;
 
 interface FileProps {
@@ -75,7 +76,7 @@ export default function MainPage() {
     return (
         <Root>
             <TopBar />
-            <Row style={{flex: 1}}>
+            <Row>
                 <DataInspector />
                 <Column>
                     <Tabs tabs={tabs} />

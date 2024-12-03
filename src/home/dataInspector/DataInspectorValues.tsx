@@ -26,7 +26,7 @@ const RegularCell = styled.span`
 
 const HeaderLabels = ["Type", "Unsigned", "Signed"];
 
-const ComputerLabels: Record<DataViewOperationType, string> = {
+const OperationLabels: Record<DataViewOperationType, string> = {
     get8Bit: "8-bit integer",
     get16Bit: "16-bit integer",
     get32Bit: "32-bit integer",
@@ -42,7 +42,7 @@ export default function DataInspectorValues({...rest}: Props) {
             {HeaderLabels.map(label => (
                 <HeaderCell key={label}>{label}</HeaderCell>
             ))}
-            {Object.entries(ComputerLabels).map(([type, value]) => (
+            {Object.entries(OperationLabels).map(([type, value]) => (
                 <React.Fragment key={type}>
                     <RegularCell>{value}</RegularCell>
                     <RegularCell>

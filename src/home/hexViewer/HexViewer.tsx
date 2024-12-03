@@ -1,37 +1,16 @@
 import {StyleProps} from "../../shared/props/Props";
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
-import {Block, getExclusiveEnd} from "./Block";
+import {getExclusiveEnd} from "./Block";
 import {map} from "../../shared/utils";
-import {Row} from "../../shared/components/Blocks";
-import Scrollbar from "./Scrollbar";
+import {FixedSizeList as List} from "react-window";
 
 const MAX_SECTOR_SIZE = 4096;
 const CELLS_PER_ROW = 16;
 
 const Root = styled.div`
     font-family: monospace;
-    overflow-y: auto;
-    height: 100vh;
-
-    /* Custom scrollbar for WebKit-based browsers */
-
-    &::-webkit-scrollbar {
-        width: 5px;
-        margin-left: 10px; /* Width of the scrollbar */
-        max-height: 5px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: #888; /* Color of the scrollbar thumb */
-        border-radius: 10px; /* Rounded corners of the scrollbar thumb */
-        max-height: 5px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background: #555; /* Color of the scrollbar thumb on hover */
-        max-height: 5px;
-    }
+    overflow-y: hidden;
 `;
 const EmptyData = new Uint8Array(MAX_SECTOR_SIZE);
 
@@ -43,81 +22,112 @@ interface Props extends StyleProps {
     file: File;
 }
 
-function getScrollbarHeight(
-    element: HTMLElement,
-    totalRowCount: number,
-    rowHeight: number
-): number {
-    const visibleHeight = element.clientHeight;
-    const contentHeight = totalRowCount * rowHeight;
-    return (visibleHeight / contentHeight) * visibleHeight;
-}
+const Bytes = ({
+    index,
+    style,
+    data,
+    block
+}: {
+    index: number;
+    style: React.CSSProperties;
+    data: Uint8Array;
+    block: {start: number; count: number};
+}) => {
+    const relativeStart = index * CELLS_PER_ROW - block.start;
+
+    const cells = map(
+        data.slice(relativeStart, relativeStart + CELLS_PER_ROW),
+        (byte, index) => {
+            const addSlitter = index + 1 === CELLS_PER_ROW / 2;
+            return (
+                <React.Fragment key={index}>
+                    <span
+                        style={{
+                            padding: 4,
+                            borderRight: addSlitter ? "1px solid" : "none",
+                            borderColor: "lightgray"
+                        }}
+                    >
+                        {byte.toString(16).padEnd(2, "0").toUpperCase()}
+                    </span>
+                </React.Fragment>
+            );
+        }
+    );
+
+    return <div style={style}>{cells}</div>;
+};
 
 export default function HexViewer({file, ...rest}: Props) {
     const reader = useMemo(() => new FileReader(), []);
-    const [block, setBlock] = useState<Block>({
-        start: 0,
-        count: getByteCountToRead(0, file.size)
-    });
-
-    const rootRef = useRef<HTMLDivElement>(null);
 
     const totalRowCount = Math.ceil(file.size / CELLS_PER_ROW);
 
-    const rowHeight = 20;
-
     const [rawData, setRawData] = useState<Uint8Array>(EmptyData);
 
+    const [block, setBlock] = useState({start: 0, count: 0});
+
+    const isLoadingRef = React.useRef(false);
+
     useEffect(() => {
-        reader.onload = () => {
+        reader.onload = e => {
+            console.log("target", e.target);
             const data = new Uint8Array(reader.result as ArrayBuffer);
             setRawData(data);
+            isLoadingRef.current = false;
         };
         return () => {
-            reader.abort();
+            // reader.abort();
         };
     }, [reader]);
 
-    useEffect(() => {
-        reader.readAsArrayBuffer(
-            file.slice(block.start, getExclusiveEnd(block))
-        );
-    }, [block, file, reader]);
-
-    const cells = map(rawData, (byte, index) => {
-        const isEndOfRow = (index + 1) % CELLS_PER_ROW === 0;
-        const addSlitter =
-            (index + 1) % (CELLS_PER_ROW / 2) === 0 && !isEndOfRow;
-        return (
-            <React.Fragment key={index}>
-                <span
-                    style={
-                        isEndOfRow
-                            ? {
-                                  borderRight: addSlitter ? "1px solid" : "none"
-                              }
-                            : {
-                                  padding: 4,
-                                  borderRight: addSlitter
-                                      ? "1px solid"
-                                      : "none",
-                                  borderColor: "lightgray"
-                              }
-                    }
-                >
-                    {byte.toString(16).padEnd(2, "0").toUpperCase()}
-                </span>
-                {isEndOfRow && <div />}
-            </React.Fragment>
-        );
-    });
+    const requestRead = useCallback(
+        (block: {start: number; count: number}) => {
+            reader.readAsArrayBuffer(
+                file.slice(block.start, getExclusiveEnd(block))
+            );
+        },
+        [file, reader]
+    );
 
     return (
-        <Row>
-            <Root ref={rootRef} {...rest}>
-                {cells}
-            </Root>
-            <Scrollbar />
-        </Row>
+        <List
+            style={{
+                fontFamily: "monospace"
+            }}
+            height={500}
+            itemCount={totalRowCount}
+            itemData={rawData}
+            itemSize={24}
+            width={600}
+            onItemsRendered={({visibleStartIndex, visibleStopIndex}) => {
+                if (isLoadingRef.current) {
+                    return;
+                }
+
+                isLoadingRef.current = true;
+
+                const start = visibleStartIndex * CELLS_PER_ROW;
+                const count = Math.min(
+                    (visibleStopIndex - visibleStartIndex) * CELLS_PER_ROW,
+                    file.size - start
+                );
+
+                console.log("start", start, "count", count);
+
+                const block = {start, count};
+                requestRead(block);
+                setBlock(block);
+            }}
+        >
+            {({index, style}) => (
+                <Bytes
+                    index={index}
+                    style={style}
+                    data={rawData}
+                    block={block}
+                />
+            )}
+        </List>
     );
 }

@@ -41,7 +41,7 @@ export default function Tab({
             <IconButton
                 icon={<CloseIcon height={12} width={12} />}
                 onClick={handleRemove}
-            ></IconButton>
+            />
         </Root>
     );
 }
