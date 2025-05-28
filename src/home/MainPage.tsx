@@ -76,7 +76,10 @@ export default function MainPage() {
     return (
         <Root>
             <TopBar />
-            <Row>
+            <Row style={{
+                height: "100%",
+                width: "100%"
+            }}>
                 <DataInspector />
                 <Column>
                     <Tabs tabs={tabs} />

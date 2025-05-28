@@ -11,11 +11,19 @@ const Root = styled(Row)`
     border-radius: 4px;
     align-items: center;
     cursor: pointer;
+    width: 130px;
 
+  
     & > div {
         margin-left: 6px;
     }
 `;
+
+const Label = styled.span`
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+`
 
 export interface TabProps extends StyleProps {
     label: string;
@@ -37,7 +45,7 @@ export default function Tab({
     };
     return (
         <Root {...rest} onClick={onSelect}>
-            {label}
+            <Label>{label}</Label>
             <IconButton
                 icon={<CloseIcon height={12} width={12} />}
                 onClick={handleRemove}
